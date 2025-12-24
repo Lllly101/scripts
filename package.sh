@@ -1,32 +1,32 @@
 #!/bin/bash
 
-获取当前目录名
+# 获取当前目录名
 dirname=$(basename "$(pwd)")
 
-构造压缩包文件名
+# 构造压缩包文件名
 tarpackage="${dirname}.tar.gz"
 
 echo "正在压缩当前目录: $(pwd)"
 echo "压缩包名称: ${tarpackage}"
 echo "排除内容: .git, .DS_Store, package.sh, ${tarpackage}"
 
----------------------------------------------------------
-核心修复：
-1. --exclude 必须放在 -czf 之前（最佳实践，兼容性更好）
-2. 显式排除 .git 目录
-3. 显式排除 .DS_Store (macOS 常见垃圾文件)
-4. 显式排除输出文件本身 (防止“file changed as we read it”错误)
----------------------------------------------------------
+#---------------------------------------------------------
+#核心修复：
+#1. --exclude 必须放在 -czf 之前（最佳实践，兼容性更好）
+#2. 显式排除 .git 目录
+#3. 显式排除 .DS_Store (macOS 常见垃圾文件)
+#4. 显式排除输出文件本身 (防止“file changed as we read it”错误)
+#---------------------------------------------------------
 tar --exclude='.git'
 --exclude='.DS_Store'
 --exclude='package.sh'
 --exclude="${tarpackage}"
 -czf "${tarpackage}" .
 
-检查退出码
+# 检查退出码
 tar_exit_code=$?
 
-0 = 成功, 1 = 警告 (如文件在读取时发生变化)
+# 0 = 成功, 1 = 警告 (如文件在读取时发生变化)
 if [ $tar_exit_code -eq 0 ] || [ $tar_exit_code -eq 1 ]; then
 echo "----------------------------------------"
 echo "✅ 压缩成功: ${tarpackage}"

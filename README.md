@@ -8,6 +8,7 @@ config iterm2-rz&sz：https://github.com/Jewel591/iterm2-lrzsz
 
 Attaches：
 - iterm2-rz
+- iterm2-sz
 
 
-官方下载网站：https://www.ohse.de/uwe/software/lrzsz.html（需要自行编译）
+官方下载网站：https://www.ohse.de/uwe/software/lrzsz.html   （需要自行编译）
